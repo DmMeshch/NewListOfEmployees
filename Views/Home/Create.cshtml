@@ -1,0 +1,29 @@
+﻿@model NewListOfEmployees.Models.Employee
+@{
+    ViewBag.Title = "Добавление пользователя";
+}
+<form asp-action="create" asp-controller="home">
+    <div class="form-group">
+        <label asp-for="Fio" class="control-label">ФИО</label>
+        <input type="text" asp-for="Fio" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DateOfBirth" class="control-label">Дата Рождения</label>
+        <input type="date" asp-for="DateOfBirth" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Sex" class="control-label">Пол</label>
+        <input type="text" asp-for="Sex" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneNumber" class="control-label">Телефон</label>
+        <input type="tel" asp-for="PhoneNumber" placeholder="89001234567" pattern="\8\{0,9}10" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Avatar" class="control-label">Фото</label>
+        <input type="file" asp-for="Avatar"  class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Отправить" class="btn btn-default" />
+    </div>
+</form>

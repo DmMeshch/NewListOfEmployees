@@ -1,0 +1,20 @@
+﻿@model IEnumerable<NewListOfEmployees.Models.Employee>
+@{
+    ViewBag.Title = "Все работники";
+}
+<a asp-action="Create">Добавить работника</a>
+<table class="table">
+    <tr><td>Имя</td></tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Fio</td>
+            <td>
+                <a asp-action="Details" asp-controller="Home" asp-route-id="@item.ID">Подробнее</a> |
+                <a asp-action="Edit" asp-controller="Home" asp-route-id="@item.ID">Изменить</a> |
+                <a asp-action="Delete" asp-controller="Home" asp-route-id="@item.ID">Удалить</a>
+            </td>
+        </tr>
+        //<tr><td>@item.Fio</td><td>@item.DateOfBirth</td><td>@item.Sex</td><td > @item.PhoneNumber</td></tr>
+    }
+</table>

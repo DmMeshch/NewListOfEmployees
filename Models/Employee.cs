@@ -13,7 +13,6 @@ namespace NewListOfEmployees.Models
         public string Sex { get; set; }
         public string PhoneNumber { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public Byte[] Avatar { get; set; }
-
+        public byte[] AvatarByte { get; set; }
     }
 }

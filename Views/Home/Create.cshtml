@@ -1,8 +1,8 @@
-﻿@model NewListOfEmployees.Models.Employee
+﻿@model NewListOfEmployees.Models.EmployeeViewModel
 @{
     ViewBag.Title = "Добавление пользователя";
 }
-<form asp-action="create" asp-controller="home">
+<form asp-action="Create" asp-controller="Home" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="Fio" class="control-label">ФИО</label>
         <input type="text" asp-for="Fio" class="form-control" />
@@ -21,7 +21,7 @@
     </div>
     <div class="form-group">
         <label asp-for="Avatar" class="control-label">Фото</label>
-        <input type="file" asp-for="Avatar"  class="form-control" />
+        <input type="file" asp-for="Avatar" class="form-control" />
     </div>
     <div class="form-group">
         <input type="submit" value="Отправить" class="btn btn-default" />

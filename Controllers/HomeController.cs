@@ -31,18 +31,24 @@ namespace NewListOfEmployees.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(EmployeeViewModel employee)
         {
-            if (employee.Avatar != null)
+            Employee emp = new Employee
             {
-                byte[] imageData = null;
-                // считываем переданный файл в массив байтов
-                using (var binaryReader = new BinaryReader(employee.Avatar.OpenReadStream()))
-                {
-                    imageData = binaryReader.ReadBytes((int)employee.Avatar.Length);
-                }
-                // установка массива байтов
-                employee.Avatar = imageData;
+                ID = employee.ID,
+                Fio = employee.Fio,
+                DateOfBirth = employee.DateOfBirth,
+                PhoneNumber = employee.PhoneNumber,
+                Sex = employee.Sex        
+            };
+            byte[] imageData = null;
+            // считываем переданный файл в массив байтов
+            using (var binaryReader = new BinaryReader(employee.Avatar.OpenReadStream()))
+            {
+                imageData = binaryReader.ReadBytes((int)employee.Avatar.Length);
             }
-            db.Employees.Add(employee);
+            // установка массива байтов
+            emp.AvatarByte = imageData;
+        
+        db.Employees.Add(emp);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -62,14 +68,45 @@ namespace NewListOfEmployees.Controllers
             {
                 Employee employee = await db.Employees.FirstOrDefaultAsync(p => p.ID == id);
                 if (employee != null)
-                    return View(employee);
+                {
+                    EmployeeViewModel emp = new EmployeeViewModel
+                    {
+                        ID = employee.ID,
+                        Fio = employee.Fio,
+                        DateOfBirth = employee.DateOfBirth,
+                        PhoneNumber = employee.PhoneNumber,
+                        Sex = employee.Sex
+                    };
+                    
+                    return View(emp);
+                }
+               
             }
+
             return NotFound();
+
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(Employee employee)
+        public async Task<IActionResult> Edit(EmployeeViewModel employee)
         {
-            db.Employees.Update(employee);
+            Employee emp = new Employee
+            {
+                ID = employee.ID,
+                Fio = employee.Fio,
+                DateOfBirth = employee.DateOfBirth,
+                PhoneNumber = employee.PhoneNumber,
+                Sex = employee.Sex
+            };
+            byte[] imageData =null;
+
+            // считываем переданный файл в массив байтов
+            using (var binaryReader = new BinaryReader(employee.Avatar.OpenReadStream()))
+            {
+                imageData = binaryReader.ReadBytes((int)employee.Avatar.Length);
+            }
+            // установка массива байтов
+            emp.AvatarByte = imageData;
+            db.Employees.Update(emp);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
